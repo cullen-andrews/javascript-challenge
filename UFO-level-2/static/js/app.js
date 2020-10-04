@@ -5,7 +5,11 @@ let tbody = d3.select("tbody");
 // Credit to writer of class activity Par_Form_Filter
 let ufos = data,
   button = d3.select('#filter-btn'),
-  form = d3.select('#form')
+  formDate = d3.select('#formDate'),
+  formCity = d3.select('#formCity'),
+  formState = d3.select('#formState'),
+  formCountry = d3.select('#formCountry'),
+  formShape = d3.select('#formShape')
 
 // Initially displaying all the data in the table.
 // Credit to writer of class activity Evr_D3_Table
@@ -29,13 +33,27 @@ const runEnter = () => {
     
     // Select the input element and get the raw HTML node
     // Get the value property of the input element
-    let inputElement = d3.select("#datetime"), 
-        inputValue = inputElement.property("value");
+    let inputElementDate = d3.select("#datetime"), 
+        inputValueDate = inputElementDate.property("value"),
+        inputElementCity = d3.select("#city"),
+        inputValueCity = inputElementCity.property("value"),
+        inputElementState = d3.select("#state"),
+        inputValueState = inputElementState.property("value"),
+        inputElementCountry = d3.select("#country"),
+        inputValueCountry = inputElementCountry.property("value"),
+        inputElementShape = d3.select("#shape"),
+        inputValueShape = inputElementShape.property("value")
+        ;
   
-    console.log(inputValue);
+    console.log(inputValueDate);
     console.log(ufos);
   
-    let filteredData = ufos.filter(sighting => sighting.datetime === inputValue);
+    let filteredData = ufos.filter(sighting => sighting.datetime === inputValueDate 
+      && sighting.city === inputValueCity
+      && sighting.state === inputValueState
+      && sighting.country === inputValueCountry
+      && sighting.shape === inputValueShape
+      )
   
     console.log(filteredData);
 
@@ -55,5 +73,8 @@ const runEnter = () => {
   
   // Create event handlers 
   button.on("click", runEnter);
-  form.on("submit",runEnter);
-  
+  formDate.on("submit",runEnter);
+  formCity.on("submit",runEnter);
+  formState.on("submit",runEnter);
+  formCountry.on("submit",runEnter);
+  formShape.on("submit",runEnter);
